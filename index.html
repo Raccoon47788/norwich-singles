@@ -2,9 +2,11 @@
 layout: default
 ---
 
+{% assign events = (site.posts | where: 'type', 'event') %}
+
 <div id="nav">
   <div class="row">
-    <div class="column">
+    <div class="columns small-12">
       <ul class="container">
         <li class="home"><a href="#">Norwich Singles</a></li>
         <li><a href="#">How it works</a></li>
@@ -18,7 +20,7 @@ layout: default
 <div id="header">
   <div class="container">
     <div class="row">
-      <div class="column">
+      <div class="columns small-12">
         <div id="logo">
           <img src="../images/logo.png" />
         </div>
@@ -40,35 +42,66 @@ layout: default
 <!-- Events -->
 <div id="events">
   <div class="container">
-    <div class="row">
-      <div class="column one-half">
 
-        <div class="event">
-          <img src="../images/london.jpg" />
-          <div class="overlay">
-            <div class="date">
-              <img src="../images/icon-date.png" />
-              <span>01 Jan - 05 Jan</span>
+    <div class="row">
+      {% for event in events %}
+        <div class="columns medium-6">
+          <div class="event">
+            <img src="../images/{{ event.image }}" />
+            <div class="overlay">
+              <div class="date">
+                <img src="../images/icon-date.png" />
+                <span>{{ event.dates }}</span>
+              </div>
+              <div class="location middle">
+                <span>{{ event.title }}</span>
+                <img src="../images/icon-pin.png" />
+              </div>
+              <div class="price">Only &pound;{{ event.price }}</div>
             </div>
-            <div class="location middle">
-              <span>London</span>
-              <img src="../images/icon-pin.png" />
-            </div>
-            <div class="price">Prices starting from &pound;400</div>
-          </div>
-          <div class="secondary">
-            <div class="middle">
-              <a href="javascript:;" class="button">Find out more</a>
+            <div class="secondary">
+              <div class="middle">
+                <a href="javascript:;" role="button" class="button more">Find out more</a>
+              </div>
             </div>
           </div>
         </div>
+      {% endfor %}
+    </div>
 
-      </div>
-      <div class="column one-half"></div>
-    </div>
-    <div class="row">
-      <div class="column one-half"></div>
-      <div class="column one-half"></div>
-    </div>
   </div>
 </div>
+
+<!-- Event overlays -->
+{% for event in events %}
+  <div class="event-overlay hide">
+    <div class="container">
+
+      <div class="row">
+        <div class="columns small-12">
+          <div class="content">
+            <h2>{{ event.title }}</h2>
+            <div>{{ event.dates }}</div>
+
+            <div>&pound;{{ event.price }} package includes;</div>
+            <ul>
+              <li>1.</li>
+              <li>2.</li>
+              <li>3.</li>
+            </ul>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac
+            felis eu orci pharetra feugiat.<br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla
+            nibh, ullamcorper id pharetra eget, pharetra sed odio.</p>
+
+            <a href="javascript:;" role="button" class="button">Purchase Trip</a>
+
+            <a href="javascript:;" role="button" class="button close">Close</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{% endfor %}

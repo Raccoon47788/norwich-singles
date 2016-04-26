@@ -8,10 +8,27 @@
     <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
 
+    <link rel="stylesheet" href="{{ '/css/foundation.css' | prepend: site.baseurl }}" />
     <link rel="stylesheet" href="{{ '/css/main.css' | prepend: site.baseurl }}" />
     <link rel="canonical" href="{{ page.url | replace: 'index.html', '' | prepend: site.baseurl | prepend: site.url }}" />
 
-    <!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+      
+    (function ($) {
+      $(document).on('ready', function () {
+        $('.event .more').on('click', function () {
+          var index = $(this).closest('.event').parent().index();
+          $('.event-overlay:eq(' + index + ')').removeClass('hide');
+        });
+
+        $('.event-overlay .close').on('click', function () {
+          $('.event-overlay').addClass('hide');
+        });
+      });
+    })(jQuery);
+
+    </script>
   </head>
   <body>
     {{ content }}
