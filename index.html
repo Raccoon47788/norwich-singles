@@ -2,15 +2,13 @@
 layout: default
 ---
 
-{% assign events = (site.posts | where: 'type', 'event') %}
-
 <div id="nav">
   <div class="row">
     <div class="columns small-12">
       <ul class="container">
         <li class="home"><a href="#">Norwich Singles</a></li>
-        <li><a href="#">How it works</a></li>
-        <li><a href="#">Events</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#events">Events</a></li>
       </ul>
     </div>
   </div>
@@ -32,7 +30,6 @@ layout: default
           nibh, ullamcorper id pharetra eget, pharetra sed odio.</p>
           <p>Integer pharetra tempor commodo. Maecenas porttitor, eros vitae ornare
           faucibus, orci mi convallis ligula.</p>
-          <a href="javascript:;" class="button">See events</a>
         </div>
       </div>
     </div>
@@ -44,7 +41,13 @@ layout: default
   <div class="container">
 
     <div class="row">
-      {% for event in events %}
+      <div class="columns small-12">
+        <h2>Events</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      {% for event in site.posts %}
         <div class="columns medium-6">
           <div class="event">
             <img src="../images/{{ event.image }}" />
@@ -72,8 +75,53 @@ layout: default
   </div>
 </div>
 
+<!-- HoW it works -->
+<div id="how-it-works">
+  <div class="container">
+
+    <div class="row">
+      <div class="columns small-12">
+        <h2>How It Works</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <ol>
+        <li class="columns medium-6 large-3">
+          <h3>Step 1 &mdash; Title</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac
+          felis eu orci pharetra feugiat.<br />
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla
+          nibh, ullamcorper id pharetra eget, pharetra sed odio.</p>
+        </li>
+        <li class="columns medium-6 large-3">
+          <h3>Step 2 &mdash; Title</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac
+          felis eu orci pharetra feugiat.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla
+          nibh, ullamcorper id pharetra eget, pharetra sed odio.</p>
+        </li>
+        <li class="columns medium-6 large-3">
+          <h3>Step 3 &mdash; Title</h3>
+          <p>Lorem ipsum dolor sit amet</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla
+          nibh, ullamcorper id pharetra eget, pharetra sed odio.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla
+          nibh, ullamcorper id pharetra eget, pharetra sed odio.</p>
+        </li>
+        <li class="columns medium-6 large-3">
+          <h3>Step 4 &mdash; Title</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac
+          felis eu orci pharetra feugiat.</p>
+        </li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
 <!-- Event overlays -->
-{% for event in events %}
+{% for event in site.posts %}
   <div class="event-overlay hide">
     <div class="container">
 
@@ -81,23 +129,24 @@ layout: default
         <div class="columns small-12">
           <div class="content">
             <h2>{{ event.title }}</h2>
-            <div>{{ event.dates }}</div>
 
-            <div>&pound;{{ event.price }} package includes;</div>
-            <ul>
-              <li>1.</li>
-              <li>2.</li>
-              <li>3.</li>
-            </ul>
+            <div class="overview">
+              <p>&pound;{{ event.price }}</p>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac
-            felis eu orci pharetra feugiat.<br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla
-            nibh, ullamcorper id pharetra eget, pharetra sed odio.</p>
+              <p class="date">
+                <img src="../images/icon-date.png" />
+                <span>{{ event.dates }}</span>
+              </p>
 
-            <a href="javascript:;" role="button" class="button">Purchase Trip</a>
+              <p class="location">
+                <img src="../images/icon-pin.png" />
+                <span>{{ event.location }}</span>
+              </p>
+            </div>
 
-            <a href="javascript:;" role="button" class="button close">Close</a>
+            {{ event.content }}
+
+            <a href="javascript:;" role="button" class="button close" aria-text="Close">&times;</a>
           </div>
         </div>
       </div>
